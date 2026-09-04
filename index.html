@@ -79,12 +79,15 @@ body {
 .kp-card {
   background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px;
   padding: 16px 20px; margin-bottom: 12px; transition: all .2s; cursor: pointer;
+  touch-action: manipulation; -webkit-tap-highlight-color: transparent;
 }
 .kp-card:hover { border-color: var(--primary-dim); background: var(--bg-hover); }
 .kp-card.learned { border-color: var(--success); }
-.kp-card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+.kp-card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; touch-action: manipulation; }
 .kp-card-actions { cursor: default; }
 .kp-title { font-size: 15px; font-weight: 600; flex: 1; }
+.kp-body { touch-action: manipulation; -webkit-user-select: text; user-select: text; }
+.kp-body img { pointer-events: none; }
 .kp-sec { font-size: 11px; color: var(--text-dim); background: var(--bg); padding: 2px 6px; border-radius: 3px; margin-right: 8px; font-weight: normal; }
 .kp-tags { display: flex; gap: 4px; flex-wrap: wrap; }
 .kp-tag { font-size: 10px; padding: 2px 6px; border-radius: 3px; white-space: nowrap; }
