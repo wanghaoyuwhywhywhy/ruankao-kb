@@ -1521,7 +1521,8 @@ function getFilteredKP() {
 
 function highlightText(text, term) {
   if (!term) return text;
-  const re = new RegExp(`(${term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+  const escapeRe = /[.*+?^${}()|[\]\\]/g;
+  const re = new RegExp(`(${term.replace(escapeRe, '\\$&')})`, 'gi');
   return text.replace(re, '<span class="highlight">$1</span>');
 }
 
