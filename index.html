@@ -96,6 +96,15 @@ body {
 .kp-sec.ch-5, .kp-sec.ch-11, .kp-sec.ch-17 { background: rgba(255,107,107,.15); color: #ff6b6b; }
 .kp-sec.ch-6, .kp-sec.ch-12, .kp-sec.ch-18 { background: rgba(66,165,245,.15); color: #42a5f5; }
 .kp-sec.ch-0 { background: var(--bg); color: var(--text-dim); }
+.subsection-header {
+  font-size: 14px; font-weight: 700; color: var(--primary);
+  margin: 20px 0 10px; padding: 8px 14px;
+  background: linear-gradient(90deg, rgba(74,158,255,.08), transparent);
+  border-left: 3px solid var(--primary); border-radius: 0 4px 4px 0;
+  position: sticky; top: 0; z-index: 5; backdrop-filter: blur(4px);
+}
+.subsection-header:first-child { margin-top: 0; }
+.subsection-count { font-size: 11px; color: var(--text-dim); font-weight: normal; margin-left: 8px; }
 .kp-tags { display: flex; gap: 4px; flex-wrap: wrap; }
 .kp-tag { font-size: 10px; padding: 2px 6px; border-radius: 3px; white-space: nowrap; }
 .kp-tag.重要 { background: rgba(255,107,107,.15); color: var(--tag-important); }
@@ -1550,14 +1559,35 @@ function renderMain() {
       ${list.length === 0 ? '<div class="empty-state">未找到匹配的知识点</div>' : list.map(kp => renderKPCard(kp)).join('')}
     `;
   } else {
+    const groups = groupBySubSection(list);
+    const cardsHtml = groups.length === 0
+      ? '<div class="empty-state">本章暂无详细知识点记录，待补充</div>'
+      : groups.map(g => `<div class="subsection-header">§ ${g.key}<span class="subsection-count">${g.items.length} 个知识点</span></div>${g.items.map(kp => renderKPCard(kp)).join('')}`).join('');
     main.innerHTML = `
       <div class="main-header">
         <h2>${ch.icon} ${ch.name}</h2>
         <p>${ch.desc} · ${list.length} 个知识点</p>
       </div>
-      ${list.length === 0 ? '<div class="empty-state">本章暂无详细知识点记录，待补充</div>' : list.map(kp => renderKPCard(kp)).join('')}
+      ${cardsHtml}
     `;
   }
+}
+
+function groupBySubSection(list) {
+  const groups = [];
+  const map = new Map();
+  list.forEach(kp => {
+    const sec = kp.sec || '';
+    const parts = sec.split('.');
+    const subKey = parts.length >= 2 ? parts[0] + '.' + parts[1] : (sec || '其他');
+    if (!map.has(subKey)) {
+      const group = { key: subKey, items: [] };
+      map.set(subKey, group);
+      groups.push(group);
+    }
+    map.get(subKey).items.push(kp);
+  });
+  return groups;
 }
 
 function renderHome(main) {
