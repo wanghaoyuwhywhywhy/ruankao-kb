@@ -86,9 +86,16 @@ body {
 .kp-card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; touch-action: manipulation; }
 .kp-card-actions { cursor: default; }
 .kp-title { font-size: 15px; font-weight: 600; flex: 1; }
-.kp-body { touch-action: manipulation; -webkit-user-select: text; user-select: text; }
-.kp-body img { pointer-events: none; }
-.kp-sec { font-size: 11px; color: var(--text-dim); background: var(--bg); padding: 2px 6px; border-radius: 3px; margin-right: 8px; font-weight: normal; }
+.kp-body { touch-action: manipulation; pointer-events: none; }
+.kp-body * { pointer-events: none; }
+.kp-sec { font-size: 11px; padding: 2px 6px; border-radius: 3px; margin-right: 8px; font-weight: normal; white-space: nowrap; }
+.kp-sec.ch-1, .kp-sec.ch-7, .kp-sec.ch-13 { background: rgba(74,158,255,.15); color: #4a9eff; }
+.kp-sec.ch-2, .kp-sec.ch-8, .kp-sec.ch-14 { background: rgba(102,187,106,.15); color: #66bb6a; }
+.kp-sec.ch-3, .kp-sec.ch-9, .kp-sec.ch-15 { background: rgba(255,167,38,.15); color: #ffa726; }
+.kp-sec.ch-4, .kp-sec.ch-10, .kp-sec.ch-16 { background: rgba(171,71,188,.15); color: #ab47bc; }
+.kp-sec.ch-5, .kp-sec.ch-11, .kp-sec.ch-17 { background: rgba(255,107,107,.15); color: #ff6b6b; }
+.kp-sec.ch-6, .kp-sec.ch-12, .kp-sec.ch-18 { background: rgba(66,165,245,.15); color: #42a5f5; }
+.kp-sec.ch-0 { background: var(--bg); color: var(--text-dim); }
 .kp-tags { display: flex; gap: 4px; flex-wrap: wrap; }
 .kp-tag { font-size: 10px; padding: 2px 6px; border-radius: 3px; white-space: nowrap; }
 .kp-tag.重要 { background: rgba(255,107,107,.15); color: var(--tag-important); }
@@ -1591,12 +1598,13 @@ function renderHome(main) {
 function renderKPCard(kp) {
   const isLearned = learnedSet.has(kp.id);
   const isExpanded = expandedSet.has(kp.id);
+  const chNum = kp.sec ? kp.sec.split('.')[0] : kp.ch;
   let bodyHtml = kp.body || '<em>本章知识点待补充</em>';
   if (searchTerm) bodyHtml = highlightText(bodyHtml, searchTerm);
   return `
     <div class="kp-card ${isLearned ? 'learned' : ''} ${isExpanded ? 'expanded' : ''}" data-id="${kp.id}" onclick="toggleExpand('${kp.id}')">
       <div class="kp-card-header">
-        <div class="kp-title">${kp.sec ? `<span class="kp-sec">${kp.sec}</span>` : ''}${searchTerm ? highlightText(kp.title, searchTerm) : kp.title}</div>
+        <div class="kp-title">${kp.sec ? `<span class="kp-sec ch-${chNum}">${kp.sec}</span>` : ''}${searchTerm ? highlightText(kp.title, searchTerm) : kp.title}</div>
         <div class="kp-tags">${(kp.tags || []).map(t => `<span class="kp-tag ${t}">${t}</span>`).join('')}</div>
       </div>
       <div class="kp-body">${bodyHtml}</div>
