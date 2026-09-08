@@ -88,18 +88,19 @@ let curPG="all",sTerm="";
 
 function buildMatrix(){
   const w=document.getElementById('matrixWrap');
-  let h='<div class="matrix" style="grid-template-columns:110px repeat('+KA.length+',1fr)">';
+  let h='<div class="matrix" style="grid-template-columns:140px repeat('+PG.length+',1fr)">';
   h+='<div class="cell-header row"></div>';
-  KA.forEach(ka=>{h+='<div class="cell-header">'+ka.n+'</div>'});
-  PG.forEach(pg=>{
-    h+='<div class="cell-header row"><div>'+pg.n+'</div><div class="pg-desc">'+pg.d+'</div></div>';
-    KA.forEach(ka=>{
+  PG.forEach(pg=>{h+='<div class="cell-header" style="color:'+PCOLOR[pg.k]+'">'+pg.n+'</div>'});
+  KA.forEach(ka=>{
+    h+='<div class="cell-header row"><div>'+ka.n+'</div></div>';
+    PG.forEach(pg=>{
       const pi=PROCS.findIndex(x=>x.pg===pg.k&&x.ka===ka.k);
       if(pi<0){h+='<div class="cell empty"></div>';return}
       const p=PROCS[pi];
       const show=curPG==='all'||p.pg===curPG;
       const match=!sTerm||p.n.includes(sTerm)||p.id.includes(sTerm)||p.i.some(x=>x.includes(sTerm))||p.t.some(x=>x.includes(sTerm))||p.o.some(x=>x.includes(sTerm));
-      h+='<div class="cell" style="border-left:3px solid '+PCOLOR[pg.k]+';'+(show&&match?'':'display:none')+'" data-idx="'+pi+'">';
+      if(!show||!match){h+='<div class="cell empty"></div>';return}
+      h+='<div class="cell" style="border-left:3px solid '+PCOLOR[pg.k]+'" data-idx="'+pi+'">';
       h+='<span class="pid">'+p.id+'</span><span class="pname">'+p.n+'</span></div>';
     });
   });
