@@ -194,8 +194,9 @@ function buildMain(){
       const allKps=(sec.kps||[]).concat(subKps);
       const shownKps=allKps.filter(kpMatches);
       if(shownKps.length>0)secHasKp=true;
-      // 章节标题也参与搜索
-      const secMatch=!searchTerm||(sec.title+sec.sec).toLowerCase().includes(searchTerm.toLowerCase());
+      // 章节标题和ITTO也参与搜索
+      const ittoText=sec.itto?(sec.itto.i.concat(sec.itto.t,sec.itto.o).join('、')):'';
+      const secMatch=!searchTerm||(sec.title+sec.sec+ittoText).toLowerCase().includes(searchTerm.toLowerCase());
       if(!secMatch&&!secHasKp&&!(activeTags.length>0)){
         // 没有搜索时显示全部
       }
