@@ -40,10 +40,18 @@ body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;backgr
 .itto-section:nth-of-type(3) h3::before{background:#66bb6a}
 .itto-list{list-style:none;padding:0}
 .itto-list li{padding:8px 12px;margin:4px 0;background:var(--bg);border-radius:6px;font-size:13px;border-left:3px solid var(--border)}
-.itto-list.tools li{border-left-color:#ffa726;cursor:pointer;transition:all .15s}
+.itto-list.tools li{border-left-color:#ffa726;transition:all .15s}
 .itto-list.tools li:hover{background:var(--bg-hover);border-left-color:var(--accent)}
-.tool-detail{margin-top:6px;padding:10px 12px;background:var(--bg-hover);border-radius:6px;font-size:12px;color:var(--text-dim);line-height:1.7;display:none}
+.tool-item{display:flex;align-items:center;gap:8px}
+.tool-arrow{display:inline-block;width:16px;text-align:center;color:var(--text-dim);font-size:11px;transition:transform .15s;flex-shrink:0}
+.tool-arrow.open{transform:rotate(90deg)}
+.tool-name{flex:1}
+.tool-badge{font-size:10px;color:var(--accent);flex-shrink:0}
+.tool-detail{margin-top:8px;padding:10px 12px;background:var(--bg-hover);border-radius:6px;font-size:12px;color:var(--text-dim);line-height:1.7;display:none}
 .tool-detail.show{display:block}
+.itto-list.tools li.no-detail{cursor:default}
+.itto-list.tools li.no-detail:hover{background:var(--bg)}
+.itto-list.tools li.has-detail{cursor:pointer}
 .search-bar{padding:12px 24px;background:var(--bg-card);border-bottom:1px solid var(--border);display:flex;gap:12px;flex-wrap:wrap}
 .search-bar input{flex:1;min-width:200px;background:var(--bg);border:1px solid var(--border);color:var(--text);padding:8px 14px;border-radius:6px;font-size:14px}
 .search-bar input:focus{outline:none;border-color:var(--primary)}
@@ -117,9 +125,9 @@ function openModal(p){
   document.getElementById('mTools').innerHTML=p.t.map((x,idx)=>{
     const d=TOOL_DETAILS[x];
     if(d){
-      return '<li onclick="event.stopPropagation();var dt=this.querySelector(\'.tool-detail\');if(dt)dt.classList.toggle(\'show\')">'+x+' <span style="color:var(--accent);font-size:10px">💡点击详解</span><div class="tool-detail">'+d+'</div></li>';
+      return '<li class="has-detail" onclick="event.stopPropagation();var dt=this.querySelector(\'.tool-detail\');var ar=this.querySelector(\'.tool-arrow\');if(dt){dt.classList.toggle(\'show\');if(ar)ar.classList.toggle(\'open\')}"><div class="tool-item"><span class="tool-arrow">▶</span><span class="tool-name">'+x+'</span><span class="tool-badge">💡详解</span></div><div class="tool-detail">'+d+'</div></li>';
     }
-    return '<li>'+x+'</li>';
+    return '<li class="no-detail"><div class="tool-item"><span class="tool-arrow" style="opacity:0">▶</span><span class="tool-name">'+x+'</span></div></li>';
   }).join('');
   document.getElementById('mOutputs').innerHTML=p.o.map(x=>'<li>'+x+'</li>').join('');
   document.getElementById('modalMask').classList.add('show');
