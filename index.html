@@ -186,6 +186,7 @@ body {
       <div class="progress-text" id="progressText">已学 0 / 0 (0%)</div>
     </div>
   </div>
+  <a href="itto.html" style="display:block;margin:8px 16px;padding:8px 12px;background:rgba(74,158,255,.1);border:1px solid rgba(74,158,255,.3);border-radius:6px;color:var(--primary);text-decoration:none;font-size:12px;text-align:center">🧠 进入 49过程ITTO知识大网</a>
   <div class="search-box">
     <input type="text" id="searchInput" placeholder="搜索知识点..." oninput="handleSearch()">
   </div>
@@ -313,6 +314,9 @@ const KNOWLEDGE_DATA = [
 },
 { id:'kp_038', ch:3, sec:'3.1.4', title:'IT服务业的特征', tags:['重要'],
   body:`<strong>IT服务业的特征</strong>：<ul><li><strong>知识密集型</strong>：依赖专业人才和知识</li><li><strong>高附加值</strong>：通过技术创新创造价值</li><li><strong>人才需求量大</strong>：对高素质人才依赖度高</li><li><strong>创新驱动</strong>：技术更新迭代快</li><li><strong>产业融合</strong>：与各行业深度融合</li></ul>`
+},
+{ id:'kp_387', ch:3, sec:'3.1.5', title:'IT服务的外部关联性', tags:['重要','高频'],
+  body:`<strong>IT服务的外部关联性</strong>（系统集成项目管理工程师教程P96）：<br><br>IT服务依赖于<strong>国民经济和良性竞争的市场环境</strong>的形成，依赖于<strong>社会信息网络</strong>的不断进步，依赖于<strong>政府相应的政策支撑</strong>、配套人才的培养和产业链上下游组织IT应用的逐渐完善。<br><br><strong>核心要点</strong>：<ul><li>IT服务与<strong>外部宏观环境</strong>强关联，而非仅供方内部活动</li><li>依赖三大外部条件：<strong>经济环境</strong>（国民经济+市场竞争）、<strong>基础设施</strong>（社会信息网络）、<strong>政策支撑</strong>（政府政策+人才培养+产业链）</li><li>这是IT服务<strong>外部关联性</strong>的关键体现，区别于供方与需方的内部供需关联</li></ul>考试常考"哪项不属于外部关联性"——注意区分<strong>供方内部活动</strong>和<strong>外部环境依赖</strong>。`
 },
 { id:'kp_039', ch:3, sec:'3.2.1', title:'IT服务原理', tags:['重要'],
   body:`<strong>IT服务原理</strong>是IT服务供方通过IT服务能力为IT服务需方提供IT服务的内在规律。<ul><li>IT服务能力是供方提供IT服务的基础</li><li>IT服务需求是需方对IT服务的期望</li><li>IT服务过程是供方为需方提供IT服务的活动</li><li>IT服务结果是IT服务产生的效果</li></ul>核心是<strong>以需方需求为导向</strong>，通过供方的服务能力满足需方的业务需求。`
@@ -945,6 +949,10 @@ const KNOWLEDGE_DATA = [
   body:`<strong>规划资源管理</strong>输出：<ol><li><strong>资源管理计划</strong>：识别/获取/管理/监督资源的方法，包括团队资源、团队组建、培训、团队绩效评价等</li><li><strong>团队章程</strong>：团队价值观、沟通指南、决策标准、冲突解决、会议指南、团队共识等</li><li>项目管理计划更新</li><li>项目文件更新（假设日志、经验教训登记册、风险登记册）</li></ol>`
 },
 
+{ id:'kp_388', ch:11, sec:'11.15.4', title:'组织结构图、RAM与资源日历 - 三种职责描述形式', tags:['重要','高频'],
+  body:`<strong>组织结构图和职位描述</strong>（系统集成项目管理工程师教程）：可使用多种形式描述项目的角色和职责，<strong>最常用的有三种</strong>：<br><br><strong>1. 层次结构图</strong>：<ul><li>自上而下展示团队成员在组织结构中的<strong>层次关系</strong></li><li>也能反映<strong>个人与其承担工作</strong>之间的联系</li><li>示例：OBS（组织分解结构）、WBS（工作分解结构）</li></ul><strong>2. 责任分配矩阵（RAM）</strong>：<ul><li>明确<strong>团队成员和工作任务</strong>之间的责任关系</li><li>能直接反映<strong>谁对哪项工作负责</strong></li><li><strong>RACI矩阵</strong>：Responsible执行 / Accountable负责 / Consult咨询 / Inform知情</li></ul><strong>3. 文本格式</strong>：<ul><li>用文字详细描述角色、职责、权限</li><li>适合需要详细说明的场景</li></ul><br><strong>资源日历</strong>：<ul><li>展示资源（人员、设备）的<strong>可用时间</strong></li><li>是资源可用性的时间窗口，<strong>不能反映个人与工作的关联</strong></li><li>考试常考：哪种工具不能反映团队成员与工作之间的联系？→ <strong>资源日历</strong></li></ul><strong>核心原则</strong>：每个工作包只有一个明确的责任人，每个成员清楚自己的角色和职责。`
+},
+
 { id:'kp_265', ch:11, sec:'11.16.1', title:'估算活动资源的主要输入', tags:['重要'],
   body:`<strong>估算活动资源</strong>输入：项目管理计划（资源管理计划、范围基准）、项目文件（活动清单、活动属性、资源日历、假设日志、风险登记册）、事业环境因素、组织过程资产。`
 },
@@ -1130,8 +1138,8 @@ const KNOWLEDGE_DATA = [
   body:`<strong>管理沟通</strong>输入：项目管理计划（沟通管理计划）、项目文件（经验教训登记册、问题日志、质量报告、风险报告）、工作绩效报告、事业环境因素、组织过程资产。`
 },
 
-{ id:'kp_308', ch:12, sec:'12.7.2', title:'管理沟通主要工具 - 沟通方法三类', tags:['重要','高频'],
-  body:`<strong>沟通方法三类</strong>：<ol><li><strong>交互式沟通</strong>：在两方或多方之间进行多向信息交换。<strong>确保全体参与者对特定话题达成共识的最有效的方法</strong>。包括会议、电话、即时通信、视频会议等。</li><li><strong>推式沟通</strong>：把信息发送给需要接收信息的特定接收方。可确保信息的发送，但<strong>不能确保信息送达受众或被目标受众理解</strong>。包括信件、备忘录、报告、电子邮件、传真、语音邮件、日志、新闻稿等。</li><li><strong>拉式沟通</strong>：用于信息量很大或受众很多的情况。要求接收者自主自行地访问信息内容。包括企业内网、电子在线课程、经验教训数据库、知识库等。</li></ol><strong>沟通模型</strong>：发送方-编码-媒介-解码-接收方-反馈-噪声。`
+{ id:'kp_308', ch:12, sec:'12.7.2', title:'管理沟通主要工具 - 沟通方法详解', tags:['重要','高频'],
+  body:`<strong>沟通方法三大类</strong>（考试高频考点）：<ol><li><strong>交互式沟通</strong>：在两方或多方之间进行<strong>实时多向信息交换</strong>。<strong>确保全体参与者对特定话题达成共识的最有效方法</strong>。包括会议、电话、即时通信、视频会议等。</li><li><strong>推式沟通</strong>：向特定接收方<strong>发送或发布</strong>信息。可确保信息发送，但<strong>不能确保信息送达或被理解</strong>。包括信件、备忘录、报告、电子邮件、传真、语音邮件、博客、新闻稿等。</li><li><strong>拉式沟通</strong>：用于<strong>大量复杂信息或大量受众</strong>的情况。要求接收方<strong>自行访问</strong>相关内容。包括门户网站、组织内网、电子在线课程、经验教训数据库或知识库。</li></ol><br><strong>按沟通参与人数分类</strong>（教程P424）：<ul><li><strong>人际沟通</strong>：个人之间交换信息，通常面对面</li><li><strong>小组沟通</strong>：3~6人小组内部开展</li><li><strong>公众沟通</strong>：单个演讲者面向一群人</li><li><strong>大众传播</strong>：信息发送人员/小组与大量目标受众（有时匿名）之间只有最低程度联系</li><li><strong>网络和社交工具沟通</strong>：借助社交工具和媒体，开展<strong>多对多</strong>的沟通</li></ul><strong>沟通模型</strong>：发送方→编码→媒介→解码→接收方→反馈；全程可能受<strong>噪声</strong>干扰。`
 },
 
 { id:'kp_309', ch:12, sec:'12.7.3', title:'管理沟通的主要输出', tags:['重要'],
