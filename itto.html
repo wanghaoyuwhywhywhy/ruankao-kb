@@ -116,12 +116,12 @@ function openModal(p){
   document.getElementById('mInputs').innerHTML=p.i.map(x=>'<li>'+x+'</li>').join('');
   document.getElementById('mTools').innerHTML=p.t.map((x,idx)=>{
     const d=TOOL_DETAILS[x];
-    return '<li data-tidx="'+idx+'">'+x+(d?' 💡':'')+(d?'<div class="tool-detail">'+d+'</div>':'')+'</li>';
+    if(d){
+      return '<li onclick="event.stopPropagation();var dt=this.querySelector(\'.tool-detail\');if(dt)dt.classList.toggle(\'show\')">'+x+' <span style="color:var(--accent);font-size:10px">💡点击详解</span><div class="tool-detail">'+d+'</div></li>';
+    }
+    return '<li>'+x+'</li>';
   }).join('');
   document.getElementById('mOutputs').innerHTML=p.o.map(x=>'<li>'+x+'</li>').join('');
-  document.querySelectorAll('#mTools li').forEach(li=>{
-    li.addEventListener('click',e=>{e.stopPropagation();li.querySelector('.tool-detail')?.classList.toggle('show')});
-  });
   document.getElementById('modalMask').classList.add('show');
 }
 function closeModal(){document.getElementById('modalMask').classList.remove('show')}
