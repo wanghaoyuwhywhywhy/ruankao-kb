@@ -8,13 +8,21 @@
 :root{--bg:#0f1419;--bg-card:#1a1f29;--bg-hover:#222834;--border:#2a3140;--text:#e0e0e0;--text-dim:#8b95a7;--primary:#4a9eff;--accent:#f0a020}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
-.header{background:var(--bg-card);border-bottom:1px solid var(--border);padding:16px 24px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:100;flex-wrap:wrap}
-.header h1{font-size:18px;font-weight:700}
-.header nav a{color:var(--primary);text-decoration:none;font-size:13px;padding:4px 12px;border-radius:4px;border:1px solid var(--border)}
-.header nav a:hover{background:var(--bg-hover)}
-.pg-legend{display:flex;gap:16px;margin-left:auto;flex-wrap:wrap}
-.pg-legend span{font-size:12px;display:flex;align-items:center;gap:4px}
-.pg-legend .dot{width:10px;height:10px;border-radius:2px;display:inline-block}
+.header{background:var(--bg-card);border-bottom:1px solid var(--border);padding:12px 24px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:100;flex-wrap:wrap}
+.header h1{font-size:18px;font-weight:700;white-space:nowrap}
+.header .nav-links{display:flex;gap:8px}
+.header .nav-links a{font-size:13px;text-decoration:none;padding:4px 12px;border-radius:4px;border:1px solid var(--border);transition:all .2s}
+.header .nav-links a.active{color:var(--primary);border-color:var(--primary)}
+.header .nav-links a:hover{background:var(--bg-hover)}
+.header .search-wrap{flex:1;min-width:180px;max-width:400px}
+.header .search-wrap input{width:100%;background:var(--bg);border:1px solid var(--border);color:var(--text);padding:6px 14px;border-radius:6px;font-size:14px}
+.header .search-wrap input:focus{outline:none;border-color:var(--primary)}
+.pg-tabs{display:flex;gap:6px;margin-left:auto;flex-wrap:wrap}
+.pg-tabs .pg-tab{display:flex;align-items:center;gap:4px;cursor:pointer;font-size:12px;padding:4px 10px;border-radius:6px;transition:all .2s;border:1px solid transparent}
+.pg-tabs .pg-tab:hover{background:var(--bg-hover)}
+.pg-tabs .pg-tab.active{border-color:var(--border);background:var(--bg)}
+.pg-tabs .pg-tab .dot{width:12px;height:12px;border-radius:3px;display:inline-block;flex-shrink:0}
+.pg-tabs .pg-tab.active .dot{box-shadow:0 0 6px currentColor}
 .matrix-wrap{padding:12px;overflow-x:auto}
 .matrix{display:grid;min-width:900px;border:1px solid var(--border);border-radius:8px;overflow:hidden}
 .cell{min-height:60px;border:1px solid var(--border);padding:4px;background:var(--bg-card);cursor:pointer;transition:all .15s;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-size:12px}
@@ -59,32 +67,31 @@ body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;backgr
 .itto-list.tools li.no-detail{cursor:default}
 .itto-list.tools li.no-detail:hover{background:var(--bg)}
 .itto-list.tools li.has-detail{cursor:pointer}
-.search-bar{padding:12px 24px;background:var(--bg-card);border-bottom:1px solid var(--border);display:flex;gap:12px;flex-wrap:wrap}
-.search-bar input{flex:1;min-width:200px;background:var(--bg);border:1px solid var(--border);color:var(--text);padding:8px 14px;border-radius:6px;font-size:14px}
-.search-bar input:focus{outline:none;border-color:var(--primary)}
-.pg-filter{display:flex;gap:4px;flex-wrap:wrap}
-.pg-filter button{background:var(--bg);border:1px solid var(--border);color:var(--text-dim);padding:6px 12px;border-radius:6px;font-size:12px;cursor:pointer}
-.pg-filter button.active{background:var(--primary);color:#fff;border-color:var(--primary)}
 @media(max-width:768px){
   .header{flex-wrap:wrap;gap:8px}
-  .pg-legend{margin-left:0;width:100%;justify-content:flex-start}
+  .pg-tabs{margin-left:0;width:100%}
   .cell{font-size:10px;min-height:48px;padding:2px}
   .cell .pname{font-size:10px}
 }
 </style>
 </head>
 <body>
-<div class="header"><h1>🧠 ITTO知识大网</h1><nav><a href="tutorial.html">📖 教程内容</a></nav><div class="pg-legend"><span><i class="dot" style="background:#ff6b6b"></i>启动</span><span><i class="dot" style="background:#4a9eff"></i>规划</span><span><i class="dot" style="background:#66bb6a"></i>执行</span><span><i class="dot" style="background:#ffa726"></i>监控</span><span><i class="dot" style="background:#ab47bc"></i>收尾</span></div></div>
-<div class="search-bar">
-<input id="searchInput" placeholder="🔍 搜索过程名、输入、工具、输出...">
-<div class="pg-filter" id="pgFilter">
-<button class="active" data-pg="all">全部</button>
-<button data-pg="init">启动</button>
-<button data-pg="plan">规划</button>
-<button data-pg="exec">执行</button>
-<button data-pg="mc">监控</button>
-<button data-pg="close">收尾</button>
-</div></div>
+<div class="header">
+<h1>🧠 ITTO</h1>
+<div class="nav-links">
+<a href="tutorial.html">📖 知识库</a>
+<a href="itto.html" class="active">🧠 ITTO</a>
+</div>
+<div class="search-wrap"><input id="searchInput" placeholder="🔍 搜索过程名、输入、工具、输出..."></div>
+<div class="pg-tabs" id="pgFilter">
+<div class="pg-tab active" data-pg="all" style="color:var(--text-dim)"><span class="dot" style="background:var(--text-dim)"></span>全部</div>
+<div class="pg-tab" data-pg="init" style="color:#ff6b6b"><span class="dot" style="background:#ff6b6b"></span>启动</div>
+<div class="pg-tab" data-pg="plan" style="color:#4a9eff"><span class="dot" style="background:#4a9eff"></span>规划</div>
+<div class="pg-tab" data-pg="exec" style="color:#66bb6a"><span class="dot" style="background:#66bb6a"></span>执行</div>
+<div class="pg-tab" data-pg="mc" style="color:#ffa726"><span class="dot" style="background:#ffa726"></span>监控</div>
+<div class="pg-tab" data-pg="close" style="color:#ab47bc"><span class="dot" style="background:#ab47bc"></span>收尾</div>
+</div>
+</div>
 <div class="matrix-wrap" id="matrixWrap"></div>
 <div class="modal-mask" id="modalMask"><div class="modal" id="modal">
 <button class="modal-close" onclick="closeModal()">×</button>
@@ -154,9 +161,9 @@ document.getElementById('modalMask').addEventListener('click',e=>{if(e.target.id
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
 document.getElementById('searchInput').addEventListener('input',e=>{sTerm=e.target.value.trim();buildMatrix()});
 document.getElementById('pgFilter').addEventListener('click',e=>{
-  if(e.target.tagName!=='BUTTON')return;
-  document.querySelectorAll('#pgFilter button').forEach(b=>b.classList.remove('active'));
-  e.target.classList.add('active');curPG=e.target.dataset.pg;buildMatrix();
+  const tab=e.target.closest('.pg-tab');if(!tab)return;
+  document.querySelectorAll('#pgFilter .pg-tab').forEach(b=>b.classList.remove('active'));
+  tab.classList.add('active');curPG=tab.dataset.pg;buildMatrix();
 });
 buildMatrix();
 </script>
